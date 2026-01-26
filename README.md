@@ -1,7 +1,7 @@
 # GRAFFITI
-— a cyber graffiti painting system by Andrew Rosinski —
+— A cyber graffiti painting system by Andrew Rosinski —
 
-Minimalist, late-90s software art for macOS. Single spray tool, three colors, brick wall.
+Minimalist, '90s software art for macOS. Single spray tool, minimal colors, brick wall.
 
 ## Build
 
@@ -23,4 +23,3 @@ The Xcode pre-build phase runs `scripts/build_core.sh` to compile the C++ core i
 
 - `/core` - pure C++ painting engine (no Apple headers).
 - `/mac` - minimal AppKit shell with a tiny Objective-C++ bridge.
-- Designed to be code-signing/notarization ready.
