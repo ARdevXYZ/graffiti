@@ -1,0 +1,23 @@
+.DS_Store
+
+# CMake build outputs
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# CTest
+CTestTestfile.cmake
+Testing/
+
+# Xcode
+*.xcworkspace/
+*.xcodeproj/
+*.xcuserstate
+*.xcuserdatad/
+*.xcuserdata/
+DerivedData/
+build-xcode/
