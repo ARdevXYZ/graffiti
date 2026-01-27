@@ -1,6 +1,17 @@
 # GRAFFITI
 — A cyber graffiti painting system by Andrew Rosinski —
 
+```
+                  __  __ _ _   _ 
+                 / _|/ _(_) | (_)
+  __ _ _ __ __ _| |_| |_ _| |_ _ 
+ / _` | '__/ _` |  _|  _| | __| |
+| (_| | | | (_| | | | | | | |_| |
+ \__, |_|  \__,_|_| |_| |_|\__|_|
+  __/ |                          
+ |___/                           
+ ```
+
 Minimalist, '90s software art for macOS. Single spray tool, minimal colors, brick wall.
 
 ## Build
