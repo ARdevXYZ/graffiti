@@ -108,12 +108,12 @@ Color CanvasModel::currentColor() const {
     switch (m_color) {
         case ColorId::White:
             return {255, 255, 255};
-        case ColorId::Red:
-            return {255, 0, 0};
+        case ColorId::Yellow:
+            return {255, 255, 0};
         case ColorId::Green:
             return {0, 255, 0};
-        case ColorId::Blue:
-            return {0, 0, 255};
+        case ColorId::Pink:
+            return {255, 105, 180};
     }
     return {255, 255, 255};
 }

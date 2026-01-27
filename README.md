@@ -13,7 +13,7 @@ The Xcode pre-build phase runs `scripts/build_core.sh` to compile the C++ core i
 ## Run
 
 - Click and drag to spray paint.
-- Press `1`, `2`, `3`, `4` to switch White/Red/Green/Blue.
+- Press `1`, `2`, `3`, `4` to switch White/Yellow/Green/Pink.
 - `Cmd+Z` undo.
 - `Cmd+N` clear.
 - `Cmd+E` export.

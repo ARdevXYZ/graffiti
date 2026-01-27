@@ -38,13 +38,13 @@ using graffiti::CanvasModel;
     CanvasModel::ColorId color = CanvasModel::ColorId::White;
     switch (index) {
         case 1:
-            color = CanvasModel::ColorId::Red;
+            color = CanvasModel::ColorId::Yellow;
             break;
         case 2:
             color = CanvasModel::ColorId::Green;
             break;
         case 3:
-            color = CanvasModel::ColorId::Blue;
+            color = CanvasModel::ColorId::Pink;
             break;
         default:
             color = CanvasModel::ColorId::White;

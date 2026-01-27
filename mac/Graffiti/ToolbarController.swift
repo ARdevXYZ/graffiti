@@ -12,7 +12,7 @@ final class ToolbarController {
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor(calibratedWhite: 0.08, alpha: 1.0).cgColor
 
-        colorControl = NSSegmentedControl(labels: ["W", "R", "G", "B"], trackingMode: .selectOne, target: nil, action: nil)
+        colorControl = NSSegmentedControl(labels: ["W", "Y", "G", "P"], trackingMode: .selectOne, target: nil, action: nil)
         colorControl.selectedSegment = 0
         colorControl.segmentStyle = .texturedRounded
         colorControl.translatesAutoresizingMaskIntoConstraints = false

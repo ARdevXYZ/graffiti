@@ -12,9 +12,9 @@ class CanvasModel {
 public:
     enum class ColorId {
         White,
-        Red,
+        Yellow,
         Green,
-        Blue
+        Pink
     };
 
     CanvasModel();
