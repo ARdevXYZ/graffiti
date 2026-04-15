@@ -5,6 +5,7 @@ final class ToolbarController {
     let colorControl: NSSegmentedControl
     let exportButton: NSButton
     let undoButton: NSButton
+    let muteButton: NSButton
 
     init() {
         containerView = NSView(frame: .zero)
@@ -12,7 +13,7 @@ final class ToolbarController {
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor(calibratedWhite: 0.08, alpha: 1.0).cgColor
 
-        colorControl = NSSegmentedControl(labels: ["W", "Y", "G", "P"], trackingMode: .selectOne, target: nil, action: nil)
+        colorControl = NSSegmentedControl(labels: ["W", "Y", "G", "B"], trackingMode: .selectOne, target: nil, action: nil)
         colorControl.selectedSegment = 0
         colorControl.segmentStyle = .texturedRounded
         colorControl.translatesAutoresizingMaskIntoConstraints = false
@@ -25,16 +26,24 @@ final class ToolbarController {
         undoButton.bezelStyle = .texturedRounded
         undoButton.translatesAutoresizingMaskIntoConstraints = false
 
+        muteButton = NSButton(title: "MUTE", target: nil, action: nil)
+        muteButton.bezelStyle = .texturedRounded
+        muteButton.translatesAutoresizingMaskIntoConstraints = false
+
         containerView.addSubview(colorControl)
         containerView.addSubview(exportButton)
         containerView.addSubview(undoButton)
+        containerView.addSubview(muteButton)
 
         NSLayoutConstraint.activate([
             colorControl.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
             colorControl.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 
-            undoButton.trailingAnchor.constraint(equalTo: exportButton.leadingAnchor, constant: -8),
+            undoButton.trailingAnchor.constraint(equalTo: muteButton.leadingAnchor, constant: -8),
             undoButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+
+            muteButton.trailingAnchor.constraint(equalTo: exportButton.leadingAnchor, constant: -8),
+            muteButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 
             exportButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
             exportButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)

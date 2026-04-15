@@ -34,6 +34,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         toolbar.exportButton.action = #selector(exportPNG(_:))
         toolbar.undoButton.target = self
         toolbar.undoButton.action = #selector(undoAction(_:))
+        toolbar.muteButton.target = self
+        toolbar.muteButton.action = #selector(toggleMute(_:))
+        syncMuteButtonTitle()
 
         canvas.onExport = { [weak self] in self?.exportPNG(nil) }
         canvas.onUndo = { [weak self] in self?.undoAction(nil) }
@@ -112,6 +115,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         canvasView?.refresh()
     }
 
+    @objc private func toggleMute(_ sender: Any?) {
+        guard let player = backgroundMusicPlayer else {
+            return
+        }
+
+        player.volume = player.volume > 0 ? 0 : 1
+        syncMuteButtonTitle()
+    }
+
     private func startBackgroundMusic() {
         let url =
             Bundle.main.url(forResource: "groove-pool", withExtension: "aif", subdirectory: "audio") ??
@@ -136,9 +148,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
             NSLog("[Audio] Playing background music from %@", url.path)
             backgroundMusicPlayer = player
+            syncMuteButtonTitle()
         } catch {
             NSLog("[Audio] Failed to initialize AVAudioPlayer: %@", error.localizedDescription)
         }
+    }
+
+    private func syncMuteButtonTitle() {
+        let isMuted = (backgroundMusicPlayer?.volume ?? 1) <= 0
+        toolbarController?.muteButton.title = isMuted ? "UNMUTE" : "MUTE"
     }
 
     private func loadBrickwall() -> (Data, Int, Int)? {

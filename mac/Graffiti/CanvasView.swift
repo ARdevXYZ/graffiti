@@ -6,6 +6,7 @@ final class CanvasView: NSView {
     private var cursorLocation: NSPoint = .zero
     private var isSpraying = false
     private var debugCursor = false
+    private lazy var sprayCursor: NSCursor = Self.makeSprayCursor()
 
     var onExport: (() -> Void)?
     var onUndo: (() -> Void)?
@@ -25,6 +26,16 @@ final class CanvasView: NSView {
 
     override var acceptsFirstResponder: Bool { true }
     override var isFlipped: Bool { true }
+
+    override func resetCursorRects() {
+        discardCursorRects()
+        addCursorRect(bounds, cursor: sprayCursor)
+    }
+
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        window?.invalidateCursorRects(for: self)
+    }
 
     func refresh() {
         needsDisplay = true
@@ -200,5 +211,23 @@ final class CanvasView: NSView {
         let origin = CGPoint(x: (boundsRect.width - scaledSize.width) * 0.5,
                              y: (boundsRect.height - scaledSize.height) * 0.5)
         return NSRect(origin: origin, size: scaledSize)
+    }
+
+    private static func makeSprayCursor() -> NSCursor {
+        let bundleURL =
+            Bundle.main.url(forResource: "icons8-spray-can-48", withExtension: "png", subdirectory: "cursor") ??
+            Bundle.main.url(forResource: "icons8-spray-can-48", withExtension: "png")
+        let image =
+            NSImage(named: "icons8-spray-can-48") ??
+            bundleURL.flatMap(NSImage.init(contentsOf:))
+
+        guard let image else {
+            NSLog("[Cursor] Missing bundled file: Resources/cursor/icons8-spray-can-48.png")
+            return .arrow
+        }
+
+        // Bias the hotspot toward the can nozzle so paint lands near the visible tip.
+        let hotSpot = NSPoint(x: min(12, image.size.width - 1), y: max(0, image.size.height - 10))
+        return NSCursor(image: image, hotSpot: hotSpot)
     }
 }

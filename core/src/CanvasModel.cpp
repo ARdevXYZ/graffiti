@@ -112,8 +112,8 @@ Color CanvasModel::currentColor() const {
             return {255, 255, 0};
         case ColorId::Green:
             return {0, 255, 0};
-        case ColorId::Pink:
-            return {255, 105, 180};
+        case ColorId::Black:
+            return {0, 0, 0};
     }
     return {255, 255, 255};
 }

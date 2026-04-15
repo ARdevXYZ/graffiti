@@ -14,7 +14,7 @@ public:
         White,
         Yellow,
         Green,
-        Pink
+        Black
     };
 
     CanvasModel();

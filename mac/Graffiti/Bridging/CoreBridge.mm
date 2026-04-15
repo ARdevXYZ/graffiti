@@ -44,7 +44,7 @@ using graffiti::CanvasModel;
             color = CanvasModel::ColorId::Green;
             break;
         case 3:
-            color = CanvasModel::ColorId::Pink;
+            color = CanvasModel::ColorId::Black;
             break;
         default:
             color = CanvasModel::ColorId::White;
