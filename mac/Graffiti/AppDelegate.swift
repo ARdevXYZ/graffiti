@@ -1,4 +1,5 @@
 import AppKit
+import AVFoundation
 import UniformTypeIdentifiers
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -6,10 +7,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: NSWindow?
     private var canvasView: CanvasView?
     private var toolbarController: ToolbarController?
+    private var backgroundMusicPlayer: AVAudioPlayer?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
         NSApp.mainMenu = buildMainMenu()
+        startBackgroundMusic()
 
         guard let (rgba, width, height) = loadBrickwall() else {
             fatalError("Failed to load brickwall.png")
@@ -107,6 +110,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func clearCanvas(_ sender: Any?) {
         core.clearPaint()
         canvasView?.refresh()
+    }
+
+    private func startBackgroundMusic() {
+        let url =
+            Bundle.main.url(forResource: "groove-pool", withExtension: "aif", subdirectory: "audio") ??
+            Bundle.main.url(forResource: "groove-pool", withExtension: "aif")
+
+        guard let url else {
+            NSLog("[Audio] Missing bundled file: Resources/audio/groove-pool.aif")
+            return
+        }
+
+        do {
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.numberOfLoops = -1
+            if !player.prepareToPlay() {
+                NSLog("[Audio] prepareToPlay failed for %@", url.path)
+            }
+
+            guard player.play() else {
+                NSLog("[Audio] Failed to start playback for %@", url.path)
+                return
+            }
+
+            NSLog("[Audio] Playing background music from %@", url.path)
+            backgroundMusicPlayer = player
+        } catch {
+            NSLog("[Audio] Failed to initialize AVAudioPlayer: %@", error.localizedDescription)
+        }
     }
 
     private func loadBrickwall() -> (Data, Int, Int)? {
